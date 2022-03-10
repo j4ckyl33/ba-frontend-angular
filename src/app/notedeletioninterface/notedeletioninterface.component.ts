@@ -6,12 +6,12 @@ import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'notedeletioninterface',
-  templateUrl: './notedeletioninterface.component.html',
-  styleUrls: ['./notedeletioninterface.component.css']
+  templateUrl: './notedeletioninterface.component.html'
 })
 export class NotedeletioninterfaceComponent implements OnInit {
 
   @Input() note: Note = <Note>{};
+
   constructor(private sharedService: SharedserviceComponent, private http: HttpClient) { }
 
   ngOnInit(): void {

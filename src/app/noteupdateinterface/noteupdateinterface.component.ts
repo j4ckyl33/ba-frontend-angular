@@ -5,12 +5,13 @@ import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'noteupdateinterface',
-  templateUrl: './noteupdateinterface.component.html',
-  styleUrls: ['./noteupdateinterface.component.css']
+  templateUrl: './noteupdateinterface.component.html'
 })
 export class NoteupdateinterfaceComponent implements OnInit {
+
   hide = true
   note: Note = <Note>{}
+
   constructor(private http: HttpClient, private sharedService: SharedserviceComponent) { }
 
   ngOnInit(): void {

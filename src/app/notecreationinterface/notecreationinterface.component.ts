@@ -6,20 +6,18 @@ import {Note} from "../sharedservice/sharedservice.component";
 
 @Component({
   selector: 'notecreationinterface',
-  templateUrl: './notecreationinterface.component.html',
-  styleUrls: ['./notecreationinterface.component.css']
+  templateUrl: './notecreationinterface.component.html'
 })
 export class NotecreationinterfaceComponent implements OnInit {
 
+  hasClickedCreation = false
   noteToCreate: Note = {
     index: 0,
     title: "",
     description: "",
-    status: "",
+    status: "Idea",
     dueDate: new Date().toLocaleDateString()
   };
-
-  hasClickedCreation = false
 
   constructor(private http: HttpClient, private sharedService: SharedserviceComponent) { }
 
@@ -31,8 +29,7 @@ export class NotecreationinterfaceComponent implements OnInit {
     this.hasClickedCreation = !this.hasClickedCreation
   }
   public async createNote(){
-    if(this.noteToCreate.index !== 0 && this.noteToCreate.title !== "" && this.noteToCreate.description !== "" &&
-      this.noteToCreate.status !== "" && this.noteToCreate.dueDate !== new Date().toLocaleDateString()){
+    if(this.noteToCreate.title !== "" && this.noteToCreate.description !== "" && this.noteToCreate.dueDate !== ""){
       await lastValueFrom(this.http.post<any>("http://localhost:8090/note/createnote", this.noteToCreate))
       this.sharedService.requestDone("createdNote")
       this.hasClickedCreation = false

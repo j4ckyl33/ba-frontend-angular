@@ -5,8 +5,7 @@ import {Note} from "../sharedservice/sharedservice.component";
 
 @Component({
   selector: 'userinterface',
-  templateUrl: './userinterface.component.html',
-  styleUrls: ['./userinterface.component.css']
+  templateUrl: './userinterface.component.html'
 })
 export class UserinterfaceComponent implements OnInit {
 
