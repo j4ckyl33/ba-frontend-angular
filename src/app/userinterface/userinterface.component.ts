@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angul
 import {HttpClient} from "@angular/common/http";
 import {SharedserviceComponent} from "../sharedservice/sharedservice.component";
 import {Note} from "../sharedservice/sharedservice.component";
+import {lastValueFrom} from "rxjs";
 
 @Component({
   selector: 'userinterface',
@@ -11,6 +12,7 @@ export class UserinterfaceComponent implements OnInit {
 
   public allNotes: Note[] = []
   public hide = false
+  private note: Note = <Note>{}
 
   constructor(private http: HttpClient, private sharedService: SharedserviceComponent) { }
 
@@ -31,5 +33,23 @@ export class UserinterfaceComponent implements OnInit {
   public sendNoteToUpdate(note: Note){
     this.hide = true
     this.sharedService.clickedUpdate(note)
+  }
+
+  public async createMassNotes(){
+    await lastValueFrom(this.http.post<any>("http://localhost:8090/note/createmassnotes", this.note))
+  }
+
+  public now(){
+    this.sharedService.requestDone("createdMassNotes")
+  }
+
+  public async updateMassNotes(){
+    await lastValueFrom(this.http.post<any>("http://localhost:8090/note/updatemassnotes", this.note))
+    this.sharedService.requestDone("updatedMassNotes")
+  }
+
+  public async deleteMassNotes(){
+    await lastValueFrom(this.http.post<any>("http://localhost:8090/note/deletemassnotes", this.note))
+    this.sharedService.requestDone("deletedMassNotes")
   }
 }
