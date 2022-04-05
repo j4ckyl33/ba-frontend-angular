@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {SharedserviceComponent} from "../sharedservice/sharedservice.component";
 import {Note} from "../sharedservice/sharedservice.component";
@@ -37,9 +37,6 @@ export class UserinterfaceComponent implements OnInit {
 
   public async createMassNotes(){
     await lastValueFrom(this.http.post<any>("http://localhost:8090/note/createmassnotes", this.note))
-  }
-
-  public now(){
     this.sharedService.requestDone("createdMassNotes")
   }
 
